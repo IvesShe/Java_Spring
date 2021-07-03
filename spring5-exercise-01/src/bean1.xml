@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--配置User對象創建-->
     <bean id="user" class="com.ives.sping5.User"></bean>
+
+    <!--set方法注入屬性-->
+<!--    <bean id="book" class="com.ives.sping5.Book">-->
+<!--        &lt;!&ndash;使用property完成屬性注入-->
+<!--            name：類裡面屬性名稱-->
+<!--            value：向屬性注入的值-->
+<!--        &ndash;&gt;-->
+<!--        <property name="bname" value="三國志"></property>-->
+<!--        <property name="bauthor" value="吳承志"></property>-->
+<!--    </bean>-->
+
+    <!--有參數構造注入屬性-->
+    <bean id="orders" class="com.ives.sping5.Orders">
+        <constructor-arg name="oname" value="蘋果電腦Mac"></constructor-arg>
+        <constructor-arg name="address" value="Taipei"></constructor-arg>
+    </bean>
+
+    <!--p名稱空間注入屬性-->
+    <bean id="book" class="com.ives.sping5.Book" p:bname="金庸" p:bauthor="天龍八部">
+    </bean>
+
+    <!--set方法注入屬性-->
+    <bean id="book2" class="com.ives.sping5.Book2">
+        <property name="bname" value="三國志2"></property>
+        <property name="bauthor" value="吳承志2"></property>
+
+        <!--null值-->
+<!--        <property name="address">-->
+<!--            <null/>-->
+<!--        </property>-->
+
+        <!--屬性包含特殊符號
+            1. 把<>進行轉譯 &lt;&gt;
+            2. 把特殊符號內容寫到CDATA
+        -->
+        <property name="address" >
+            <value><![CDATA[<<台北>>]]></value>
+        </property>
+    </bean>
 </beans>
